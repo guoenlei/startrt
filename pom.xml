@@ -1,0 +1,1305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.ald</groupId>
+    <artifactId>stat.base</artifactId>
+    <packaging>jar</packaging>
+    <version>0.2</version>
+    <properties>
+        <spark.version>2.2.1</spark.version>
+
+        <jackson.version>2.9.4</jackson.version>
+        <phoenix.version>4.13.1-HBase-1.2</phoenix.version>
+        <scala.version>2.11.8</scala.version>
+        <encoding>UTF-8</encoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <system.test.provider>compile</system.test.provider>
+        <!--  -->
+        <spark.host>local[*]</spark.host>
+        <database.driver>com.mysql.jdbc.Driver</database.driver>
+        <jdbc.url>jdbc:mysql://10.0.0.61:3306/ald_xinen_test?useUnicode=true&amp;characterEncoding=utf-8</jdbc.url>
+        <jdbc.username>aldwx</jdbc.username>
+        <jdbc.password>wxAld2016__$#</jdbc.password>
+
+        <redis.host>10.0.220.10</redis.host>
+        <redis.port>6379</redis.port>
+        <redis.password>crs-fzq0gp0u:aldwxredis123</redis.password>
+        <redis.write.pool.maxIdle>100</redis.write.pool.maxIdle>
+        <client.redis.write.pool.maxIdle>100</client.redis.write.pool.maxIdle>
+
+        <default.redis.host>10.0.220.10</default.redis.host>
+        <default.redis.port>6379</default.redis.port>
+        <default.redis.password>crs-fzq0gp0u:aldwxredis123</default.redis.password>
+        <default.redis.write.pool.maxIdle>100</default.redis.write.pool.maxIdle>
+        <default.client.redis.write.pool.maxIdle>100</default.client.redis.write.pool.maxIdle>
+
+        <!-- 场景-->
+        <jobScene.redis.host>10.0.220.10</jobScene.redis.host>
+        <jobScene.redis.port>6379</jobScene.redis.port>
+        <jobScene.redis.password>crs-fzq0gp0u:aldwxredis123</jobScene.redis.password>
+        <jobScene.redis.write.pool.maxIdle>100</jobScene.redis.write.pool.maxIdle>
+        <jobScene.client.redis.write.pool.maxIdle>100</jobScene.client.redis.write.pool.maxIdle>
+
+        <!-- 终端redis 服务器-->
+        <jobTerminal.redis.host>10.0.220.3</jobTerminal.redis.host>
+        <jobTerminal.redis.port>6379</jobTerminal.redis.port>
+        <jobTerminal.redis.password>crs-rdc54hxk:aldwxredis123</jobTerminal.redis.password>
+        <jobTerminal.redis.write.pool.maxIdle>100</jobTerminal.redis.write.pool.maxIdle>
+        <jobTerminal.client.redis.write.pool.maxIdle>100</jobTerminal.client.redis.write.pool.maxIdle>
+
+        <!-- 外链-all redis 服务器-->
+        <jobLink.redis.host>10.0.220.4</jobLink.redis.host>
+        <jobLink.redis.port>6379</jobLink.redis.port>
+        <jobLink.redis.password>crs-kpmb3edk:aldwxredis123</jobLink.redis.password>
+        <jobLink.redis.write.pool.maxIdle>100</jobLink.redis.write.pool.maxIdle>
+        <jobLink.client.redis.write.pool.maxIdle>100</jobLink.client.redis.write.pool.maxIdle>
+
+        <!-- 分享redis 服务器-->
+        <jobShare.redis.host>10.0.220.10</jobShare.redis.host>
+        <jobShare.redis.port>6379</jobShare.redis.port>
+        <jobShare.redis.password>crs-iyhwm97s:aldwxredis123</jobShare.redis.password>
+        <jobShare.redis.write.pool.maxIdle>100</jobShare.redis.write.pool.maxIdle>
+        <jobShare.client.redis.write.pool.maxIdle>100</jobShare.client.redis.write.pool.maxIdle>
+
+        <!-- 二维码redis 服务器-->
+        <jobQr.redis.host>10.0.220.10</jobQr.redis.host>
+        <jobQr.redis.port>6379</jobQr.redis.port>
+        <jobQr.redis.password>crs-iyhwm97s:aldwxredis123</jobQr.redis.password>
+        <jobQr.redis.write.pool.maxIdle>100</jobQr.redis.write.pool.maxIdle>
+        <jobQr.client.redis.write.pool.maxIdle>100</jobQr.client.redis.write.pool.maxIdle>
+
+        <!-- 手机job 服务器-->
+        <jobPhone.redis.host>10.0.220.7</jobPhone.redis.host>
+        <jobPhone.redis.port>6379</jobPhone.redis.port>
+        <jobPhone.redis.password>crs-8nj0u11e:aldwxredis123</jobPhone.redis.password>
+        <jobPhone.redis.write.pool.maxIdle>100</jobPhone.redis.write.pool.maxIdle>
+        <jobPhone.client.redis.write.pool.maxIdle>100</jobPhone.client.redis.write.pool.maxIdle>
+
+        <!-- 手机job 服务器-->
+        <jobPhone.redis.host>10.0.220.7</jobPhone.redis.host>
+        <jobPhone.redis.port>6379</jobPhone.redis.port>
+        <jobPhone.redis.password>crs-8nj0u11e:aldwxredis123</jobPhone.redis.password>
+        <jobPhone.redis.write.pool.maxIdle>100</jobPhone.redis.write.pool.maxIdle>
+        <jobPhone.client.redis.write.pool.maxIdle>100</jobPhone.client.redis.write.pool.maxIdle>
+
+        <!-- job region-->
+        <jobRegion.redis.host>10.0.220.7</jobRegion.redis.host>
+        <jobRegion.redis.port>6379</jobRegion.redis.port>
+        <jobRegion.redis.password>crs-8nj0u11e:aldwxredis123</jobRegion.redis.password>
+        <jobRegion.redis.write.pool.maxIdle>100</jobRegion.redis.write.pool.maxIdle>
+        <jobRegion.client.redis.write.pool.maxIdle>100</jobRegion.client.redis.write.pool.maxIdle>
+
+        <!-- 入口页面-->
+        <entrancePage.redis.host>10.0.220.10</entrancePage.redis.host>
+        <entrancePage.redis.port>6379</entrancePage.redis.port>
+        <entrancePage.redis.password>crs-iyhwm97s:aldwxredis123</entrancePage.redis.password>
+        <entrancePage.redis.write.pool.maxIdle>100</entrancePage.redis.write.pool.maxIdle>
+        <entrancePage.client.redis.write.pool.maxIdle>100</entrancePage.client.redis.write.pool.maxIdle>
+
+        <hdfs.url>hdfs://:9001/</hdfs.url>
+        <kafka.host>10.0.221.9:9092</kafka.host>
+        <zookeeper.host>10.0.221.9:2181</zookeeper.host>
+        <zookeeper.data.path>/</zookeeper.data.path>
+        <file.root>/test</file.root>
+
+        <kafka.default.raw.group.id>WCSA_DEFAULT_GROUP_KAFKA</kafka.default.raw.group.id>
+        <kafka.default.raw.topic>online_new</kafka.default.raw.topic>
+        <kafka.jobScene.raw.group.id>WCSA_SCENE_GROUP_KAFKA</kafka.jobScene.raw.group.id>
+        <kafka.jobScene.raw.topic>online_new</kafka.jobScene.raw.topic>
+        <kafka.jobTerminal.raw.group.id>WCSA_JOB_TERMINAL_GROUP_KAFKA</kafka.jobTerminal.raw.group.id>
+        <kafka.jobTerminal.raw.topic>online_new</kafka.jobTerminal.raw.topic>
+        <kafka.jobPhone.raw.group.id>WCSA_JOB_PHONE_GROUP_KAFKA</kafka.jobPhone.raw.group.id>
+        <kafka.jobPhone.raw.topic>online_new</kafka.jobPhone.raw.topic>
+        <kafka.jobRegion.raw.group.id>WCSA_JOB_REGION_GROUP_KAFKA</kafka.jobRegion.raw.group.id>
+        <kafka.jobRegion.raw.topic>online_new</kafka.jobRegion.raw.topic>
+        <kafka.jobLink.raw.group.id>WCSA_JOB_LINK_GROUP_KAFKA</kafka.jobLink.raw.group.id>
+        <kafka.jobLink.raw.topic>online_newer</kafka.jobLink.raw.topic>
+        <kafka.jobLinkFirst.raw.group.id>WCSA_JOB_LINK_GROUP_KAFKA</kafka.jobLinkFirst.raw.group.id>
+        <kafka.jobLinkFirst.raw.topic>online_newer</kafka.jobLinkFirst.raw.topic>
+        <kafka.jobLinkSecond.raw.group.id>WCSA_JOB_LINK_GROUP_KAFKA</kafka.jobLinkSecond.raw.group.id>
+        <kafka.jobLinkSecond.raw.topic>online_new</kafka.jobLinkSecond.raw.topic>
+        <kafka.entrancePage.raw.group.id>WCSA_ENTRANCE_PAGE_GROUP_KAFKA</kafka.entrancePage.raw.group.id>
+        <kafka.entrancePage.raw.topic>online_new</kafka.entrancePage.raw.topic>
+        <kafka.jobShare.raw.group.id>WCSA_SHARE_PAGE_GROUP_KAFKA</kafka.jobShare.raw.group.id>
+        <kafka.jobShare.raw.topic>online_newer</kafka.jobShare.raw.topic>
+        <kafka.jobQr.raw.group.id>WCSA_QR_PAGE_GROUP_KAFKA</kafka.jobQr.raw.group.id>
+        <kafka.jobQr.raw.topic>online_new</kafka.jobQr.raw.topic>
+
+        <phoenix.jdbc.driver>org.apache.phoenix.jdbc.PhoenixDriver</phoenix.jdbc.driver>
+        <phoenix.zk.url></phoenix.zk.url>
+        <phonenix.url>jdbc:phoenix::2181</phonenix.url>
+        <streaming.realtime.interval>120</streaming.realtime.interval>
+        <!-- 场景值 其他|未知-->
+        <other.scene.group.id>0</other.scene.group.id>
+        <other.scene.id>0</other.scene.id>
+        <unknown.scene.group.id>1</unknown.scene.group.id>
+        <unknown.scene.id>1</unknown.scene.id>
+        <write.to.kafka>true</write.to.kafka>
+        <kafka.mysql.sql.topic>mysql_test</kafka.mysql.sql.topic>
+        <grey_kafka.mysql.sql.topic>rt_sql_test</grey_kafka.mysql.sql.topic>
+    </properties>
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <properties>
+                <!-- 自己的配置 -->
+                <kafka.host>127.0.0.1:9092</kafka.host>
+                <grey_kafka.mysql.sql.topic>mysql_test</grey_kafka.mysql.sql.topic>
+                <grey_kafka.host>127.0.0.1:9092</grey_kafka.host>
+                <zookeeper.host>127.0.0.1:2181</zookeeper.host>
+                <kafka.entrancePage.raw.topic>online_new</kafka.entrancePage.raw.topic>
+                <kafka.entrancePage.raw.group.id>ALD_GROUP_KAFKA_MLT</kafka.entrancePage.raw.group.id>
+                <!-- mlt -->
+                <jdbc.url>jdbc:mysql://localhost:3306/ald_xinen_test?useUnicode=true&amp;characterEncoding=utf-8
+                </jdbc.url>
+                <jdbc.username>root</jdbc.username>
+                <jdbc.password>mike1234</jdbc.password>
+
+                <redis.host>127.0.0.1</redis.host>
+                <redis.port>6379</redis.port>
+                <redis.password>xceof</redis.password>
+                <redis.write.pool.maxIdle>5</redis.write.pool.maxIdle>
+                <client.redis.write.pool.maxIdle>5</client.redis.write.pool.maxIdle>
+
+                <default.redis.host>127.0.0.1</default.redis.host>
+                <default.redis.port>6379</default.redis.port>
+                <default.redis.password>xceof</default.redis.password>
+                <default.redis.write.pool.maxIdle>5</default.redis.write.pool.maxIdle>
+                <default.client.redis.write.pool.maxIdle>5</default.client.redis.write.pool.maxIdle>
+                <kafka.default.raw.group.id>WCSA_DEFAULT_GROUP_KAFKA</kafka.default.raw.group.id>
+                <kafka.default.raw.topic>online_newer</kafka.default.raw.topic>
+                <jobShare.redis.host>127.0.0.1</jobShare.redis.host>
+                <jobShare.redis.port>6379</jobShare.redis.port>
+                <jobShare.redis.password>xceof</jobShare.redis.password>
+                <jobShare.redis.write.pool.maxIdle>10</jobShare.redis.write.pool.maxIdle>
+                <jobShare.client.redis.write.pool.maxIdle>10</jobShare.client.redis.write.pool.maxIdle>
+                <jobLink.redis.host>127.0.0.1</jobLink.redis.host>
+                <jobLink.redis.port>6379</jobLink.redis.port>
+                <jobLink.redis.password>aldwxredis123</jobLink.redis.password>
+                <jobLink.redis.write.pool.maxIdle>100</jobLink.redis.write.pool.maxIdle>
+                <jobLink.client.redis.write.pool.maxIdle>100</jobLink.client.redis.write.pool.maxIdle>
+                <kafka.jobLink.raw.group.id>WCSA_JOB_LINK_GROUP_KAFKA</kafka.jobLink.raw.group.id>
+                <kafka.jobLink.raw.topic>online_newer</kafka.jobLink.raw.topic>
+                <streaming.realtime.interval>30</streaming.realtime.interval>
+                <patch.batch.num>5000</patch.batch.num>
+                <write.to.kafka>true</write.to.kafka>
+                <kafka.raw.topic.partitions>0,1</kafka.raw.topic.partitions>
+
+                <!-- 提交命令 -->
+                <num.executors>1</num.executors>
+                <executor.cores>3</executor.cores>
+                <executor.memory>6g</executor.memory>
+                <max.cores>3</max.cores>
+                <jar.path>/home/hadoop/spark/rt</jar.path>
+                <submit.user>spark</submit.user>
+
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <resources>
+                    <resource>
+                        <directory>src/main/resources/dev</directory>
+                    </resource>
+                </resources>
+            </build>
+        </profile>
+        <profile>
+            <id>test</id>
+            <properties>
+                <spark.version>2.3.2</spark.version>
+                <!--趋势 \ 默认-->
+                <kafka.default.raw.group.id>WCSA_DEFAULT_GROUP_TEST_KAFKA</kafka.default.raw.group.id>
+                <kafka.default.raw.topic>rt_test</kafka.default.raw.topic>
+                <!--                <kafka.default.raw.topic>online_newer</kafka.default.raw.topic>-->
+
+                <!--分享-->
+                <kafka.jobShare.raw.group.id>WCSA_SHARE_PAGE_GROUP_TEST_KAFKA</kafka.jobShare.raw.group.id>
+                <kafka.jobShare.raw.topic>rt_test</kafka.jobShare.raw.topic>
+
+                <!--场景值-->
+                <kafka.jobScene.raw.group.id>WCSA_SCENE_GROUP_TEST_KAFKA</kafka.jobScene.raw.group.id>
+                <kafka.jobScene.raw.topic>rt_test</kafka.jobScene.raw.topic>
+                <!--                <kafka.jobScene.raw.topic>online_newer</kafka.jobScene.raw.topic>-->
+
+                <!--二维码-->
+                <kafka.jobQr.raw.group.id>WCSA_QR_PAGE_GROUP_TEST_KAFKA</kafka.jobQr.raw.group.id>
+                <kafka.jobQr.raw.topic>rt_test</kafka.jobQr.raw.topic>
+                <!--                <kafka.jobQr.raw.topic>online_newer</kafka.jobQr.raw.topic>-->
+
+                <!--旧版广告检测-->
+                <kafka.jobLinkNew.raw.group.id>WCSA_JOB_LINK_GROUP_TEST_KAFKA_NEW</kafka.jobLinkNew.raw.group.id>
+                <kafka.jobLinkNew.raw.topic>rt_test</kafka.jobLinkNew.raw.topic>
+                <!--                <kafka.jobLinkNew.raw.topic>online_newer</kafka.jobLinkNew.raw.topic>-->
+
+                <!--                测试-新版广告检测实时用Kafka-->
+                <kafka.jobNewAdMonitor.raw.group.id>WCSA_NEW_AD_MONITOR_GROUP_TEST_KAFKA
+                </kafka.jobNewAdMonitor.raw.group.id>
+                <kafka.jobNewAdMonitor.raw.topic>rt_test</kafka.jobNewAdMonitor.raw.topic>
+                <!--                <kafka.jobNewAdMonitor.raw.topic>online_newer</kafka.jobNewAdMonitor.raw.topic>-->
+
+                <!--新增analysisVersion模块的KafkaGroupId 的topic和group-->
+                <kafka.analysisVersion.raw.group.id>WCSA_ANALYSIS_GROUP_TEST_KAFKA</kafka.analysisVersion.raw.group.id>
+                <kafka.analysisVersion.raw.topic>rt_test</kafka.analysisVersion.raw.topic>
+                <!--                <kafka.analysisVersion.raw.topic>online_newer</kafka.analysisVersion.raw.topic>-->
+
+                <!--DebugTrend-->
+                <kafka.debug_trend.raw.group.id>WCSA_DEBUG_TREND_GROUP_TEST_KAFKA</kafka.debug_trend.raw.group.id>
+                <kafka.debug_trend.raw.topic>rt-debug</kafka.debug_trend.raw.topic>
+
+                <!--taojj-->
+                <kafka.jobAdxLink.raw.group.id>WCSA_JOB_ADX_LINK_GROUP_TEST_KAFKA</kafka.jobAdxLink.raw.group.id>
+                <kafka.jobAdxLink.raw.topic>online_newer</kafka.jobAdxLink.raw.topic>
+
+                <!--                <kafka.jobTerminal.raw.group.id>WCSA_JOB_TERMINAL_GROUP_TEST_KAFKA</kafka.jobTerminal.raw.group.id>-->
+                <!--                <kafka.jobTerminal.raw.topic>online_newer</kafka.jobTerminal.raw.topic>-->
+                <!--                <kafka.jobPhone.raw.group.id>WCSA_JOB_PHONE_GROUP_TEST_KAFKA</kafka.jobPhone.raw.group.id>-->
+                <!--                <kafka.jobPhone.raw.topic>online_newer</kafka.jobPhone.raw.topic>-->
+                <!--                <kafka.jobRegion.raw.group.id>WCSA_JOB_REGION_GROUP_TEST_KAFKA</kafka.jobRegion.raw.group.id>-->
+                <!--                <kafka.jobRegion.raw.topic>online_newer</kafka.jobRegion.raw.topic>-->
+                <!--                <kafka.jobLink.raw.group.id>WCSA_JOB_LINK_GROUP_TEST_KAFKA</kafka.jobLink.raw.group.id>-->
+                <!--                <kafka.jobLink.raw.topic>online_newer</kafka.jobLink.raw.topic>-->
+                <!--                <kafka.jobLinkFirst.raw.group.id>WCSA_JOB_LINK_GROUP_TEST_KAFKA</kafka.jobLinkFirst.raw.group.id>-->
+                <!--                <kafka.jobLinkFirst.raw.topic>online_newer</kafka.jobLinkFirst.raw.topic>-->
+                <!--                <kafka.jobLinkSecond.raw.group.id>WCSA_JOB_LINK_GROUP_TEST_KAFKA</kafka.jobLinkSecond.raw.group.id>-->
+                <!--                <kafka.jobLinkSecond.raw.topic>online_newer</kafka.jobLinkSecond.raw.topic>-->
+                <!--                <kafka.entrancePage.raw.group.id>WCSA_ENTRANCE_PAGE_GROUP_TEST_KAFKA</kafka.entrancePage.raw.group.id>-->
+                <!--                <kafka.entrancePage.raw.topic>online_newer</kafka.entrancePage.raw.topic>-->
+
+                <!--                *********************MySQL*********************-->
+                <database.driver>com.mysql.jdbc.Driver</database.driver>
+                <!--分库索引表-->
+                <split.database.url>jdbc:mysql://10.0.220.36:3306/ald_service_bus_split?useUnicode=true&amp;characterEncoding=utf-8
+                </split.database.url>
+                <split.jdbc.username>tongjitest</split.jdbc.username>
+                <split.jdbc.password>ookun7Ee</split.jdbc.password>
+                <!--wxMini-->
+                <jdbc.url>jdbc:mysql://10.0.220.36:3306/ald_wx_test?useUnicode=true&amp;characterEncoding=utf-8
+                </jdbc.url>
+                <jdbc.username>tongjitest</jdbc.username>
+                <jdbc.password>ookun7Ee</jdbc.password>
+                <!--qqMini-->
+                <qq.jdbc.url>jdbc:mysql://10.0.220.36:3306/ald_qq_test?useUnicode=true&amp;characterEncoding=utf-8
+                </qq.jdbc.url>
+                <qq.jdbc.username>tongjitest</qq.jdbc.username>
+                <qq.jdbc.password>ookun7Ee</qq.jdbc.password>
+
+                <!--                *********************Kafka*********************-->
+                <!--测试kafka-->
+                <!--                <kafka.host>10.0.221.9:9092</kafka.host>-->
+                <!--                <kafka.raw.topic.partitions>0,1</kafka.raw.topic.partitions>-->
+                <!-- 生产kafka-->
+                <kafka.host>10.0.221.3:9092</kafka.host>
+                <!--灰度kafka-->
+                <grey_kafka.host>10.0.221.3:9092</grey_kafka.host>
+                <!--                Kafka - Partitions-->
+                <kafka.raw.topic.partitions>0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23
+                </kafka.raw.topic.partitions>
+                <kafka.raw.debug.topic.partitions>0,1</kafka.raw.debug.topic.partitions>
+
+                <!--                Kafka - Topics-->
+                <kafka.mysql.sql.group.id>Write2Mysql_Test</kafka.mysql.sql.group.id>
+                <kafka.mysql.sql.topic>mysql_test</kafka.mysql.sql.topic>
+                <kafka.mysql.split.sql.group.id>Write2MysqlSplit_Test</kafka.mysql.split.sql.group.id>
+                <kafka.mysql.split.sql.topic>mysql_test</kafka.mysql.split.sql.topic>
+                <debug_kafka.mysql.sql.group.id>DebugWrite2Mysql_Test</debug_kafka.mysql.sql.group.id>
+                <debug_kafka.mysql.sql.topic>rt-debug-MySQL</debug_kafka.mysql.sql.topic>
+                <grey_kafka.mysql.sql.topic>rt_sql_test</grey_kafka.mysql.sql.topic>
+
+                <hbase.table.name>STAT.ALDSTAT_LINK_AUTH_OPENID_TEST_NEW</hbase.table.name>
+
+                <!--                *********************Mini - 总Redis*********************-->
+                <redis.host>10.0.220.79</redis.host>
+                <redis.port>6000</redis.port>
+                <redis.password>ldy=,pev+sin59c</redis.password>
+                <redis.write.pool.maxIdle>10</redis.write.pool.maxIdle>
+                <client.redis.write.pool.maxIdle>10</client.redis.write.pool.maxIdle>
+
+                <!--专门存储offset的redis-->
+                <offset.redis.host>10.0.220.16</offset.redis.host>
+                <offset.redis.port>6379</offset.redis.port>
+                <offset.redis.password>aldwxredis123</offset.redis.password>
+                <offset.redis.write.pool.maxIdle>10</offset.redis.write.pool.maxIdle>
+                <offset.client.redis.write.pool.maxIdle>10</offset.client.redis.write.pool.maxIdle>
+                <offset.no.cluster>true</offset.no.cluster>
+
+                <!--                *********************Mini - Trend*********************-->
+                <!--趋势分析-->
+                <default.redis.host>10.0.220.79</default.redis.host>
+                <default.redis.port>6000</default.redis.port>
+                <default.redis.password>ldy=,pev+sin59c</default.redis.password>
+                <default.redis.write.pool.maxIdle>10</default.redis.write.pool.maxIdle>
+                <default.client.redis.write.pool.maxIdle>10</default.client.redis.write.pool.maxIdle>
+                <default.no.cluster>false</default.no.cluster>
+
+                <!--趋势分析的offset配置-->
+                <trend_offset.redis.host>10.0.220.16</trend_offset.redis.host>
+                <trend_offset.redis.port>6379</trend_offset.redis.port>
+                <trend_offset.redis.password>aldwxredis123</trend_offset.redis.password>
+                <trend_offset.redis.write.pool.maxIdle>10</trend_offset.redis.write.pool.maxIdle>
+                <trend_offset.client.redis.write.pool.maxIdle>10</trend_offset.client.redis.write.pool.maxIdle>
+                <trend_offset.no.cluster>true</trend_offset.no.cluster>
+
+                <!--                *********************Mini - DebugTrend*********************-->
+                <!--趋势模块debug的redis配置-->
+                <debug_trend.redis.host>10.0.220.79</debug_trend.redis.host>
+                <debug_trend.redis.port>6000</debug_trend.redis.port>
+                <debug_trend.redis.password>ldy=,pev+sin59c</debug_trend.redis.password>
+                <debug_trend.redis.write.pool.maxIdle>10</debug_trend.redis.write.pool.maxIdle>
+                <debug_trend.client.redis.write.pool.maxIdle>10</debug_trend.client.redis.write.pool.maxIdle>
+                <debug_trend.no.cluster>false</debug_trend.no.cluster>
+
+                <!--趋势模块debug的offset redis配置-->
+                <debug_trend_offset.redis.host>10.0.220.16</debug_trend_offset.redis.host>
+                <debug_trend_offset.redis.port>6379</debug_trend_offset.redis.port>
+                <debug_trend_offset.redis.password>aldwxredis123</debug_trend_offset.redis.password>
+                <debug_trend_offset.redis.write.pool.maxIdle>10</debug_trend_offset.redis.write.pool.maxIdle>
+                <debug_trend_offset.client.redis.write.pool.maxIdle>10
+                </debug_trend_offset.client.redis.write.pool.maxIdle>
+                <debug_trend_offset.no.cluster>true</debug_trend_offset.no.cluster>
+
+                <!--                *********************Mini - Share*********************-->
+                <!-- 分享redis 服务器-->
+                <jobShare.redis.host>10.0.220.79</jobShare.redis.host>
+                <jobShare.redis.port>6000</jobShare.redis.port>
+                <jobShare.redis.password>ldy=,pev+sin59c</jobShare.redis.password>
+                <jobShare.redis.write.pool.maxIdle>10</jobShare.redis.write.pool.maxIdle>
+                <jobShare.client.redis.write.pool.maxIdle>10</jobShare.client.redis.write.pool.maxIdle>
+                <jobShare.no.cluster>false</jobShare.no.cluster>
+
+                <!--分享分析的offset配置-->
+                <share_offset.redis.host>10.0.220.16</share_offset.redis.host>
+                <share_offset.redis.port>6379</share_offset.redis.port>
+                <share_offset.redis.password>aldwxredis123</share_offset.redis.password>
+                <share_offset.redis.write.pool.maxIdle>50</share_offset.redis.write.pool.maxIdle>
+                <share_offset.client.redis.write.pool.maxIdle>50</share_offset.client.redis.write.pool.maxIdle>
+                <share_offset.no.cluster>true</share_offset.no.cluster>
+
+                <!--                *********************Mini - Scene*********************-->
+                <!--场景值-->
+                <jobScene.redis.host>10.0.220.79</jobScene.redis.host>
+                <jobScene.redis.port>6000</jobScene.redis.port>
+                <jobScene.redis.password>ldy=,pev+sin59c</jobScene.redis.password>
+                <jobScene.redis.write.pool.maxIdle>10</jobScene.redis.write.pool.maxIdle>
+                <jobScene.client.redis.write.pool.maxIdle>10</jobScene.client.redis.write.pool.maxIdle>
+                <jobScene.no.cluster>false</jobScene.no.cluster>
+
+                <!--场景值的offset配置-->
+                <scene_offset.redis.host>10.0.220.16</scene_offset.redis.host>
+                <scene_offset.redis.port>6379</scene_offset.redis.port>
+                <scene_offset.redis.password>aldwxredis123</scene_offset.redis.password>
+                <scene_offset.redis.write.pool.maxIdle>10</scene_offset.redis.write.pool.maxIdle>
+                <scene_offset.client.redis.write.pool.maxIdle>10</scene_offset.client.redis.write.pool.maxIdle>
+                <scene_offset.no.cluster>true</scene_offset.no.cluster>
+
+                <!--                *********************Mini - QR*********************-->
+                <!-- 二维码 redis 服务器-->
+                <jobQr.redis.host>10.0.220.79</jobQr.redis.host>
+                <jobQr.redis.port>6000</jobQr.redis.port>
+                <jobQr.redis.password>ldy=,pev+sin59c</jobQr.redis.password>
+                <jobQr.redis.write.pool.maxIdle>10</jobQr.redis.write.pool.maxIdle>
+                <jobQr.client.redis.write.pool.maxIdle>10</jobQr.client.redis.write.pool.maxIdle>
+                <jobQr.no.cluster>false</jobQr.no.cluster>
+
+                <!-- 二维码的offset配置-->
+                <qr_offset.redis.host>10.0.220.16</qr_offset.redis.host>
+                <qr_offset.redis.port>6379</qr_offset.redis.port>
+                <qr_offset.redis.password>aldwxredis123</qr_offset.redis.password>
+                <qr_offset.redis.write.pool.maxIdle>10</qr_offset.redis.write.pool.maxIdle>
+                <qr_offset.client.redis.write.pool.maxIdle>10</qr_offset.client.redis.write.pool.maxIdle>
+                <qr_offset.no.cluster>true</qr_offset.no.cluster>
+
+                <!--                *********************Mini - old ad monitor*********************-->
+                <!-- 外链-all redis 服务器-->
+                <jobLinkNew.redis.host>10.0.220.79</jobLinkNew.redis.host>
+                <jobLinkNew.redis.port>6000</jobLinkNew.redis.port>
+                <jobLinkNew.redis.password>ldy=,pev+sin59c</jobLinkNew.redis.password>
+                <jobLinkNew.redis.write.pool.maxIdle>10</jobLinkNew.redis.write.pool.maxIdle>
+                <jobLinkNew.client.redis.write.pool.maxIdle>10</jobLinkNew.client.redis.write.pool.maxIdle>
+                <jobLinkNew.no.cluster>false</jobLinkNew.no.cluster>
+
+                <!--外链的offset配置-->
+                <new_link_offset.redis.host>10.0.220.16</new_link_offset.redis.host>
+                <new_link_offset.redis.port>6379</new_link_offset.redis.port>
+                <new_link_offset.redis.password>aldwxredis123</new_link_offset.redis.password>
+                <new_link_offset.redis.write.pool.maxIdle>10</new_link_offset.redis.write.pool.maxIdle>
+                <new_link_offset.client.redis.write.pool.maxIdle>10</new_link_offset.client.redis.write.pool.maxIdle>
+                <new_link_offset.no.cluster>true</new_link_offset.no.cluster>
+
+                <!--                *********************Mini - new ad monitor*********************-->
+                <!--                新版广告检测 redis 服务器-->
+                <jobNewAdMonitor.redis.host>10.0.220.79</jobNewAdMonitor.redis.host>
+                <jobNewAdMonitor.redis.port>6000</jobNewAdMonitor.redis.port>
+                <jobNewAdMonitor.redis.password>ldy=,pev+sin59c</jobNewAdMonitor.redis.password>
+                <jobNewAdMonitor.redis.write.pool.maxIdle>10</jobNewAdMonitor.redis.write.pool.maxIdle>
+                <jobNewAdMonitor.client.redis.write.pool.maxIdle>10</jobNewAdMonitor.client.redis.write.pool.maxIdle>
+                <jobNewAdMonitor.no.cluster>false</jobNewAdMonitor.no.cluster>
+
+                <!--                新版广告检测offset配置-->
+                <newAdMonitor_offset.redis.host>10.0.220.16</newAdMonitor_offset.redis.host>
+                <newAdMonitor_offset.redis.port>6379</newAdMonitor_offset.redis.port>
+                <newAdMonitor_offset.redis.password>aldwxredis123</newAdMonitor_offset.redis.password>
+                <newAdMonitor_offset.redis.write.pool.maxIdle>10</newAdMonitor_offset.redis.write.pool.maxIdle>
+                <newAdMonitor_offset.client.redis.write.pool.maxIdle>10
+                </newAdMonitor_offset.client.redis.write.pool.maxIdle>
+                <newAdMonitor_offset.no.cluster>true</newAdMonitor_offset.no.cluster>
+
+                <!--                *********************Mini - taojj*********************-->
+                <!-- 外链-all redis 服务器-->
+                <jobAdxLink.redis.host>10.0.220.79</jobAdxLink.redis.host>
+                <jobAdxLink.redis.port>6000</jobAdxLink.redis.port>
+                <jobAdxLink.redis.password>ldy=,pev+sin59c</jobAdxLink.redis.password>
+                <jobAdxLink.redis.write.pool.maxIdle>10</jobAdxLink.redis.write.pool.maxIdle>
+                <jobAdxLink.client.redis.write.pool.maxIdle>10</jobAdxLink.client.redis.write.pool.maxIdle>
+                <jobAdxLink.no.cluster>false</jobAdxLink.no.cluster>
+
+                <!--外链的offset配置-->
+                <adx_link_offset.redis.host>10.0.220.16</adx_link_offset.redis.host>
+                <adx_link_offset.redis.port>6379</adx_link_offset.redis.port>
+                <adx_link_offset.redis.password>aldwxredis123</adx_link_offset.redis.password>
+                <adx_link_offset.redis.write.pool.maxIdle>10</adx_link_offset.redis.write.pool.maxIdle>
+                <adx_link_offset.client.redis.write.pool.maxIdle>10</adx_link_offset.client.redis.write.pool.maxIdle>
+                <adx_link_offset.no.cluster>true</adx_link_offset.no.cluster>
+
+                <!-- 终端redis 服务器-->
+                <!--                <jobTerminal.redis.host>10.0.220.11</jobTerminal.redis.host>-->
+                <!--                <jobTerminal.redis.port>6379</jobTerminal.redis.port>-->
+                <!--                <jobTerminal.redis.password>crs-5p0vqjky:aldwxredis123</jobTerminal.redis.password>-->
+                <!--                <jobTerminal.redis.write.pool.maxIdle>10</jobTerminal.redis.write.pool.maxIdle>-->
+                <!--                <jobTerminal.client.redis.write.pool.maxIdle>10</jobTerminal.client.redis.write.pool.maxIdle>-->
+                <!--                <jobTerminal.no.cluster>true</jobTerminal.no.cluster>-->
+
+                <!-- 外链-all redis 服务器-->
+                <!--                <jobLink.redis.host>10.0.220.11</jobLink.redis.host>-->
+                <!--                <jobLink.redis.port>6379</jobLink.redis.port>-->
+                <!--                <jobLink.redis.password>aldwxredis123</jobLink.redis.password>-->
+                <!--                <jobLink.redis.write.pool.maxIdle>50</jobLink.redis.write.pool.maxIdle>-->
+                <!--                <jobLink.client.redis.write.pool.maxIdle>50</jobLink.client.redis.write.pool.maxIdle>-->
+                <!--                <jobLink.no.cluster>true</jobLink.no.cluster>-->
+
+                <!--外链的offset配置-->
+                <!--                <link_offset.redis.host>10.0.220.14</link_offset.redis.host>-->
+                <!--                <link_offset.redis.port>6379</link_offset.redis.port>-->
+                <!--                <link_offset.redis.password>aldwxredis123</link_offset.redis.password>-->
+                <!--                <link_offset.redis.write.pool.maxIdle>50</link_offset.redis.write.pool.maxIdle>-->
+                <!--                <link_offset.client.redis.write.pool.maxIdle>50</link_offset.client.redis.write.pool.maxIdle>-->
+                <!--                <link_offset.no.cluster>true</link_offset.no.cluster>-->
+
+                <!-- 手机job 服务器-->
+                <!--                <jobPhone.redis.host>10.0.220.11</jobPhone.redis.host>-->
+                <!--                <jobPhone.redis.port>6379</jobPhone.redis.port>-->
+                <!--                <jobPhone.redis.password>crs-5p0vqjky:aldwxredis123</jobPhone.redis.password>-->
+                <!--                <jobPhone.redis.write.pool.maxIdle>10</jobPhone.redis.write.pool.maxIdle>-->
+                <!--                <jobPhone.client.redis.write.pool.maxIdle>10</jobPhone.client.redis.write.pool.maxIdle>-->
+                <!--                <jobPhone.no.cluster>true</jobPhone.no.cluster>-->
+
+                <!-- job region  服务器-->
+                <!--                <jobRegion.redis.host>10.0.220.16</jobRegion.redis.host>-->
+                <!--                <jobRegion.redis.port>6379</jobRegion.redis.port>-->
+                <!--                <jobRegion.redis.password>crs-5p0vqjky:aldwxredis123</jobRegion.redis.password>-->
+                <!--                <jobRegion.redis.write.pool.maxIdle>10</jobRegion.redis.write.pool.maxIdle>-->
+                <!--                <jobRegion.client.redis.write.pool.maxIdle>10</jobRegion.client.redis.write.pool.maxIdle>-->
+                <!--                <jobRegion.no.cluster>true</jobRegion.no.cluster>-->
+
+                <!-- php的测试redis-->
+                <!--                <insertHbase.redis.host>10.0.0.156</insertHbase.redis.host>-->
+                <!--                <insertHbase.redis.port>6379</insertHbase.redis.port>-->
+                <!--                <insertHbase.redis.password>aldwxredis123</insertHbase.redis.password>-->
+                <!--                <insertHbase.redis.write.pool.maxIdle>50</insertHbase.redis.write.pool.maxIdle>-->
+                <!--                <insertHbase.client.redis.write.pool.maxIdle>50</insertHbase.client.redis.write.pool.maxIdle>-->
+                <!--                <insertHbase.no.cluster>true</insertHbase.no.cluster>-->
+
+                <!--用户分群redis-->
+                <!--                <groupETL.redis.host>10.0.220.6</groupETL.redis.host>-->
+                <!--                <groupETL.redis.port>6379</groupETL.redis.port>-->
+                <!--                <groupETL.redis.password>crs-e4dunjuu:aldwxredis123</groupETL.redis.password>-->
+                <!--                <groupETL.redis.write.pool.maxIdle>10</groupETL.redis.write.pool.maxIdle>-->
+                <!--                <groupETL.client.redis.write.pool.maxIdle>10</groupETL.client.redis.write.pool.maxIdle>-->
+                <!--                <groupETL.no.cluster>true</groupETL.no.cluster>-->
+
+                <spark.host>yarn-cluster</spark.host>
+                <file.root>/test</file.root>
+                <!--                <phoenix.zk.url></phoenix.zk.url>-->
+                <phoenix.jdbc.driver>org.apache.phoenix.jdbc.PhoenixDriver</phoenix.jdbc.driver>
+                <phonenix.url>jdbc:phoenix::2181</phonenix.url>
+                <!--                <streaming.realtime.interval>5</streaming.realtime.interval>-->
+                <streaming.realtime.interval>30</streaming.realtime.interval>
+                <patch.batch.num>50000</patch.batch.num>
+                <!-- 提交命令 -->
+                <num.executors>1</num.executors>
+                <executor.cores>3</executor.cores>
+                <executor.memory>6g</executor.memory>
+                <max.cores>3</max.cores>
+                <jar.path>/home/hadoop/spark/rt</jar.path>
+                <submit.user>spark</submit.user>
+                <write.to.kafka>true</write.to.kafka>
+
+            </properties>
+            <dependencies>
+                <!--spark 升级为2.3.0后，kafka缺少的依赖-->
+                <dependency>
+                    <groupId>org.apache.kafka</groupId>
+                    <artifactId>kafka_2.11</artifactId>
+                    <version>0.10.0.1</version>
+                </dependency>
+            </dependencies>
+        </profile>
+        <profile>
+            <!-- 灰度 -->
+            <id>grey</id>
+            <properties>
+                <kafka.host>10.0.221.3:9092</kafka.host>
+                <kafka.raw.topic.partitions>0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23
+                </kafka.raw.topic.partitions>
+                <kafka.default.raw.group.id>WCSA_DEFAULT_GROUP_KAFKA</kafka.default.raw.group.id>
+                <kafka.default.raw.topic>rt_test</kafka.default.raw.topic>
+                <kafka.jobLink.raw.group.id>WCSA_JOB_LINK_GROUP_KAFKA</kafka.jobLink.raw.group.id>
+                <kafka.jobLink.raw.topic>rt_test</kafka.jobLink.raw.topic>
+                <kafka.jobShare.raw.group.id>WCSA_SHARE_PAGE_GROUP_KAFKA</kafka.jobShare.raw.group.id>
+                <kafka.jobShare.raw.topic>rt_test</kafka.jobShare.raw.topic>
+                <kafka.jobScene.raw.group.id>WCSA_SCENE_PAGE_GROUP_KAFKA</kafka.jobScene.raw.group.id>
+                <kafka.jobScene.raw.topic>rt_test</kafka.jobScene.raw.topic>
+                <kafka.jobQr.raw.group.id>WCSA_QR_PAGE_GROUP_KAFKA</kafka.jobQr.raw.group.id>
+                <kafka.jobQr.raw.topic>rt_test</kafka.jobQr.raw.topic>
+                <kafka.mysql.sql.topic>rt_sql_test</kafka.mysql.sql.topic>
+                <grey_kafka.mysql.sql.topic>rt_sql_test</grey_kafka.mysql.sql.topic>
+                <grey_kafka.host>10.0.221.3:9092</grey_kafka.host>
+
+                <spark.host>yarn-cluster</spark.host>
+                <database.driver>com.mysql.jdbc.Driver</database.driver>
+                <jdbc.url>jdbc:mysql://10.0.0.123:3306/ald_rt_test?useUnicode=true&amp;characterEncoding=utf-8
+                </jdbc.url>
+                <jdbc.username>rttest</jdbc.username>
+                <jdbc.password>Er3KgSd7RDqX</jdbc.password>
+
+                <redis.host>10.0.220.11</redis.host><!--默认情况下，这里也是趋势分析的redis配置-->
+                <redis.port>6379</redis.port>
+                <redis.password>aldwxredis123</redis.password>
+                <redis.write.pool.maxIdle>50</redis.write.pool.maxIdle>
+                <client.redis.write.pool.maxIdle>50</client.redis.write.pool.maxIdle>
+
+                <!--趋势分析-->
+                <default.redis.host>10.0.220.11</default.redis.host>
+                <default.redis.port>6379</default.redis.port>
+                <default.redis.password>aldwxredis123</default.redis.password>
+                <default.redis.write.pool.maxIdle>50</default.redis.write.pool.maxIdle>
+                <default.client.redis.write.pool.maxIdle>50</default.client.redis.write.pool.maxIdle>
+                <default.no.cluster>false</default.no.cluster>
+
+                <trend_offset.redis.host>10.0.220.16</trend_offset.redis.host>
+                <trend_offset.redis.port>6379</trend_offset.redis.port>
+                <trend_offset.redis.password>crs-5p0vqjky:aldwxredis123</trend_offset.redis.password>
+                <trend_offset.redis.write.pool.maxIdle>10</trend_offset.redis.write.pool.maxIdle>
+                <trend_offset.client.redis.write.pool.maxIdle>10</trend_offset.client.redis.write.pool.maxIdle>
+                <trend_offset.no.cluster>true</trend_offset.no.cluster>
+
+                <!--专门存储offset的redis-->
+                <offset.redis.host>10.0.220.13</offset.redis.host>
+                <offset.redis.port>6379</offset.redis.port>
+                <offset.redis.password>crs-au8dio74:aldwxredis123</offset.redis.password>
+                <offset.redis.write.pool.maxIdle>50</offset.redis.write.pool.maxIdle>
+                <offset.client.redis.write.pool.maxIdle>50</offset.client.redis.write.pool.maxIdle>
+                <offset.no.cluster>true</offset.no.cluster>
+
+                <!-- 场景 -->
+                <jobScene.redis.host>10.0.220.11</jobScene.redis.host>
+                <jobScene.redis.port>6379</jobScene.redis.port>
+                <jobScene.redis.password>aldwxredis123</jobScene.redis.password>
+                <jobScene.redis.write.pool.maxIdle>50</jobScene.redis.write.pool.maxIdle>
+                <jobScene.client.redis.write.pool.maxIdle>50</jobScene.client.redis.write.pool.maxIdle>
+                <jobScene.no.cluster>false</jobScene.no.cluster>
+
+                <scene_offset.redis.host>10.0.220.8</scene_offset.redis.host>
+                <scene_offset.redis.port>6379</scene_offset.redis.port>
+                <scene_offset.redis.password>crs-6ojn93dw:aldwxredis123</scene_offset.redis.password>
+                <scene_offset.redis.write.pool.maxIdle>50</scene_offset.redis.write.pool.maxIdle>
+                <scene_offset.client.redis.write.pool.maxIdle>50</scene_offset.client.redis.write.pool.maxIdle>
+                <scene_offset.no.cluster>true</scene_offset.no.cluster>
+
+                <!-- 终端redis 服务器-->
+                <jobTerminal.redis.host>10.0.220.3</jobTerminal.redis.host>
+                <jobTerminal.redis.port>6379</jobTerminal.redis.port>
+                <jobTerminal.redis.password>crs-rdc54hxk:aldwxredis123</jobTerminal.redis.password>
+                <jobTerminal.redis.write.pool.maxIdle>50</jobTerminal.redis.write.pool.maxIdle>
+                <jobTerminal.client.redis.write.pool.maxIdle>50</jobTerminal.client.redis.write.pool.maxIdle>
+                <jobTerminal.no.cluster>true</jobTerminal.no.cluster>
+
+                <!-- 外链-all redis 服务器-->
+                <jobLink.redis.host>10.0.220.6</jobLink.redis.host>
+                <jobLink.redis.port>6379</jobLink.redis.port>
+                <jobLink.redis.password>crs-e4dunjuu:aldwxredis123</jobLink.redis.password>
+                <jobLink.redis.write.pool.maxIdle>10</jobLink.redis.write.pool.maxIdle>
+                <jobLink.client.redis.write.pool.maxIdle>10</jobLink.client.redis.write.pool.maxIdle>
+                <jobLink.no.cluster>true</jobLink.no.cluster>
+
+                <!--外链的offset配置-->
+                <link_offset.redis.host>10.0.220.16</link_offset.redis.host>
+                <link_offset.redis.port>6379</link_offset.redis.port>
+                <link_offset.redis.password>crs-5p0vqjky:aldwxredis123</link_offset.redis.password>
+                <link_offset.redis.write.pool.maxIdle>50</link_offset.redis.write.pool.maxIdle>
+                <link_offset.client.redis.write.pool.maxIdle>50</link_offset.client.redis.write.pool.maxIdle>
+                <link_offset.no.cluster>true</link_offset.no.cluster>
+
+                <!-- 分享redis 服务器-->
+                <jobShare.redis.host>10.0.220.11</jobShare.redis.host>
+                <jobShare.redis.port>6379</jobShare.redis.port>
+                <jobShare.redis.password>aldwxredis123</jobShare.redis.password>
+                <jobShare.redis.write.pool.maxIdle>50</jobShare.redis.write.pool.maxIdle>
+                <jobShare.client.redis.write.pool.maxIdle>50</jobShare.client.redis.write.pool.maxIdle>
+                <jobShare.no.cluster>false</jobShare.no.cluster>
+
+                <share_offset.redis.host>10.0.220.8</share_offset.redis.host>
+                <share_offset.redis.port>6379</share_offset.redis.port>
+                <share_offset.redis.password>crs-6ojn93dw:aldwxredis123</share_offset.redis.password>
+                <share_offset.redis.write.pool.maxIdle>50</share_offset.redis.write.pool.maxIdle>
+                <share_offset.client.redis.write.pool.maxIdle>50</share_offset.client.redis.write.pool.maxIdle>
+                <share_offset.no.cluster>true</share_offset.no.cluster>
+
+                <!-- 二维码redis 服务器-->
+                <jobQr.redis.host>10.0.220.11</jobQr.redis.host>
+                <jobQr.redis.port>6379</jobQr.redis.port>
+                <jobQr.redis.password>aldwxredis123</jobQr.redis.password>
+                <jobQr.redis.write.pool.maxIdle>50</jobQr.redis.write.pool.maxIdle>
+                <jobQr.client.redis.write.pool.maxIdle>50</jobQr.client.redis.write.pool.maxIdle>
+                <jobQr.no.cluster>false</jobQr.no.cluster>
+
+                <!-- 手机job 服务器-->
+                <jobPhone.redis.host>10.0.220.7</jobPhone.redis.host>
+                <jobPhone.redis.port>6379</jobPhone.redis.port>
+                <jobPhone.redis.password>crs-8nj0u11e:aldwxredis123</jobPhone.redis.password>
+                <jobPhone.redis.write.pool.maxIdle>50</jobPhone.redis.write.pool.maxIdle>
+                <jobPhone.client.redis.write.pool.maxIdle>50</jobPhone.client.redis.write.pool.maxIdle>
+                <jobPhone.no.cluster>true</jobPhone.no.cluster>
+
+                <!-- job region 服务器-->
+                <jobRegion.redis.host>10.0.220.7</jobRegion.redis.host>
+                <jobRegion.redis.port>6379</jobRegion.redis.port>
+                <jobRegion.redis.password>crs-8nj0u11e:aldwxredis123</jobRegion.redis.password>
+                <jobRegion.redis.write.pool.maxIdle>50</jobRegion.redis.write.pool.maxIdle>
+                <jobRegion.client.redis.write.pool.maxIdle>50</jobRegion.client.redis.write.pool.maxIdle>
+                <jobRegion.no.cluster>true</jobRegion.no.cluster>
+
+                <!-- 入口页面-->
+                <entrancePage.redis.host>10.0.220.10</entrancePage.redis.host>
+                <entrancePage.redis.port>6379</entrancePage.redis.port>
+                <entrancePage.redis.password>crs-iyhwm97s:aldwxredis123</entrancePage.redis.password>
+                <entrancePage.redis.write.pool.maxIdle>50</entrancePage.redis.write.pool.maxIdle>
+                <entrancePage.client.redis.write.pool.maxIdle>50</entrancePage.client.redis.write.pool.maxIdle>
+                <entrancePage.no.cluster>true</entrancePage.no.cluster>
+
+                <phoenix.jdbc.driver>org.apache.phoenix.jdbc.PhoenixDriver</phoenix.jdbc.driver>
+                <phoenix.zk.url></phoenix.zk.url>
+                <phonenix.url>jdbc:phoenix::2181</phonenix.url>
+                <streaming.realtime.interval>180</streaming.realtime.interval>
+                <patch.batch.num>500000</patch.batch.num>
+                <write.to.kafka>true</write.to.kafka>
+
+
+                <!-- 提交命令 -->
+                <num.executors>20</num.executors>
+                <executor.cores>3</executor.cores>
+                <executor.memory>10g</executor.memory>
+                <max.cores>60</max.cores>
+                <jar.path>/opt/tencent/rt/</jar.path>
+                <submit.user>hadoop</submit.user>
+            </properties>
+        </profile>
+        <profile>
+            <id>prod</id>
+            <properties>
+
+                <!--生产kafka-->
+                <kafka.host>10.0.221.3:9092</kafka.host>
+                <!--灰度kafka-->
+                <grey_kafka.host>10.0.221.3:9092</grey_kafka.host>
+                <kafka.raw.topic.partitions>0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23
+                </kafka.raw.topic.partitions>
+                <kafka.raw.debug.topic.partitions>0,1</kafka.raw.debug.topic.partitions>
+                <kafka.default.raw.group.id>WCSA_DEFAULT_GROUP_PROD_KAFKA</kafka.default.raw.group.id>
+                <kafka.default.raw.topic>rt_test</kafka.default.raw.topic>
+                <kafka.jobLink.raw.group.id>WCSA_JOB_LINK_GROUP_PROD_KAFKA</kafka.jobLink.raw.group.id>
+                <kafka.jobLink.raw.topic>rt_test</kafka.jobLink.raw.topic>
+                <kafka.jobLinkNew.raw.group.id>WCSA_JOB_LINK_GROUP_PROD_KAFKA_NEW</kafka.jobLinkNew.raw.group.id>
+                <kafka.jobLinkNew.raw.topic>rt_test</kafka.jobLinkNew.raw.topic>
+                <kafka.jobAdxLink.raw.group.id>WCSA_JOB_ADX_LINK_GROUP_PROD_KAFKA</kafka.jobAdxLink.raw.group.id>
+                <kafka.jobAdxLink.raw.topic>rt_test</kafka.jobAdxLink.raw.topic>
+                <kafka.jobShare.raw.group.id>WCSA_SHARE_PAGE_GROUP_PROD_KAFKA</kafka.jobShare.raw.group.id>
+                <kafka.jobShare.raw.topic>rt_test</kafka.jobShare.raw.topic>
+                <kafka.jobScene.raw.group.id>WCSA_SCENE_PAGE_GROUP_PROD_KAFKA</kafka.jobScene.raw.group.id>
+                <kafka.jobScene.raw.topic>rt_test</kafka.jobScene.raw.topic>
+                <kafka.jobQr.raw.group.id>WCSA_QR_PAGE_GROUP_PROD_KAFKA</kafka.jobQr.raw.group.id>
+                <kafka.jobQr.raw.topic>rt_test</kafka.jobQr.raw.topic>
+
+                <kafka.debug_trend.group.id>WCSA_DEBUG_TREND_GROUP_PROD_KAFKA</kafka.debug_trend.group.id>
+                <kafka.debug_trend.raw.topic>rt-debug</kafka.debug_trend.raw.topic>
+                <!--新增analysisVersion模块的KafkaGroupId 的group-->
+                <kafka.analysisVersion.raw.group.id>WCSA_ANALYSIS_GROUP_PROD_KAFKA</kafka.analysisVersion.raw.group.id>
+                <kafka.analysisVersion.raw.topic>rt_test</kafka.analysisVersion.raw.topic>
+                <!--                生产-新版广告检测实时用Kafka-->
+                <kafka.jobNewAdMonitor.raw.group.id>WCSA_NEW_AD_MONITOR_GROUP_KAFKA</kafka.jobNewAdMonitor.raw.group.id>
+                <kafka.jobNewAdMonitor.raw.topic>rt_test</kafka.jobNewAdMonitor.raw.topic>
+
+                <!--                写库 Kafka -->
+                <kafka.mysql.sql.group.id>Write2Mysql_Prod</kafka.mysql.sql.group.id>
+                <kafka.mysql.sql.topic>rt_sql_prod</kafka.mysql.sql.topic>
+
+                <grey_kafka.mysql.sql.topic>rt_sql_test</grey_kafka.mysql.sql.topic>
+
+                <debug_kafka.mysql.sql.group.id>DebugWrite2Mysql_Prod</debug_kafka.mysql.sql.group.id>
+                <debug_kafka.mysql.sql.topic>rt-debug-MySQL</debug_kafka.mysql.sql.topic>
+
+                <kafka.mysql.split.sql.group.id>Write2MysqlSplit_Prod</kafka.mysql.split.sql.group.id>
+                <kafka.mysql.split.sql.topic>split_sql</kafka.mysql.split.sql.topic>
+
+
+                <spark.host>yarn-cluster</spark.host>
+                <database.driver>com.mysql.jdbc.Driver</database.driver>
+                <jdbc.url>jdbc:mysql://10.0.0.179:3306/ald_xinen?useUnicode=true&amp;characterEncoding=utf-8
+                </jdbc.url>
+                <jdbc.username>aldstat</jdbc.username>
+                <jdbc.password>Eet9Ii-Chat8</jdbc.password>
+                <split.database.url>jdbc:mysql://10.0.1.10:3306/ald_service_bus?useUnicode=true&amp;characterEncoding=utf-8
+                </split.database.url>
+                <split.jdbc.username>servicebus_read</split.jdbc.username>
+                <split.jdbc.password>RPVcFnn2C73f</split.jdbc.password>
+                <qq.jdbc.url>jdbc:mysql://10.0.220.69:3306/ald_qx?useUnicode=true&amp;characterEncoding=utf-8
+                </qq.jdbc.url>
+                <qq.jdbc.username>aldqx</qq.jdbc.username>
+                <qq.jdbc.password>g#uald%o6efw</qq.jdbc.password>
+                <hbase.table.name>STAT.ALDSTAT_LINK_AUTH_OPENID</hbase.table.name>
+
+                <redis.host>10.0.220.9</redis.host><!--默认情况下这里也是趋势的redis配置-->
+                <redis.port>6379</redis.port>
+                <redis.password>aldwxredis123</redis.password><!--crs-au8dio74:aldwxredis123-->
+                <redis.write.pool.maxIdle>50</redis.write.pool.maxIdle>
+                <client.redis.write.pool.maxIdle>50</client.redis.write.pool.maxIdle>
+
+                <!--趋势分析 redis服务-->
+                <default.redis.host>10.0.220.9</default.redis.host>
+                <default.redis.port>6379</default.redis.port>
+                <default.redis.password>aldwxredis123</default.redis.password>
+                <default.redis.write.pool.maxIdle>50</default.redis.write.pool.maxIdle>
+                <default.client.redis.write.pool.maxIdle>50</default.client.redis.write.pool.maxIdle>
+                <default.no.cluster>false</default.no.cluster>
+
+                <!--趋势分析的offset配置-->
+                <trend_offset.redis.host>10.0.220.2</trend_offset.redis.host>
+                <trend_offset.redis.port>6379</trend_offset.redis.port>
+                <trend_offset.redis.password>crs-o3gy1ls2:aldwxredis123</trend_offset.redis.password>
+                <trend_offset.redis.write.pool.maxIdle>50</trend_offset.redis.write.pool.maxIdle>
+                <trend_offset.client.redis.write.pool.maxIdle>50</trend_offset.client.redis.write.pool.maxIdle>
+                <trend_offset.no.cluster>true</trend_offset.no.cluster>
+
+                <!-- 场景值 redis服务-->
+                <jobScene.redis.host>10.0.220.12</jobScene.redis.host>
+                <jobScene.redis.port>6379</jobScene.redis.port>
+                <jobScene.redis.password>aldwxredis123</jobScene.redis.password>
+                <jobScene.redis.write.pool.maxIdle>50</jobScene.redis.write.pool.maxIdle>
+                <jobScene.client.redis.write.pool.maxIdle>50</jobScene.client.redis.write.pool.maxIdle>
+                <jobScene.no.cluster>false</jobScene.no.cluster>
+
+                <!--存储场景值的offset-->
+                <scene_offset.redis.host>10.0.220.13</scene_offset.redis.host>
+                <scene_offset.redis.port>6379</scene_offset.redis.port>
+                <scene_offset.redis.password>crs-au8dio74:aldwxredis123</scene_offset.redis.password>
+                <scene_offset.redis.write.pool.maxIdle>50</scene_offset.redis.write.pool.maxIdle>
+                <scene_offset.client.redis.write.pool.maxIdle>50</scene_offset.client.redis.write.pool.maxIdle>
+                <scene_offset.no.cluster>true</scene_offset.no.cluster>
+
+                <!-- 二维码redis 服务器-->
+                <jobQr.redis.host>10.0.220.12</jobQr.redis.host>
+                <jobQr.redis.port>6379</jobQr.redis.port>
+                <jobQr.redis.password>aldwxredis123</jobQr.redis.password>
+                <jobQr.redis.write.pool.maxIdle>100</jobQr.redis.write.pool.maxIdle>
+                <jobQr.client.redis.write.pool.maxIdle>100</jobQr.client.redis.write.pool.maxIdle>
+                <jobQr.no.cluster>false</jobQr.no.cluster>
+
+                <!-- 二维码的offset配置-->
+                <qr_offset.redis.host>10.0.220.7</qr_offset.redis.host>
+                <qr_offset.redis.port>6379</qr_offset.redis.port>
+                <qr_offset.redis.password>crs-iejdf3k0:aldwxredis123</qr_offset.redis.password>
+                <qr_offset.redis.write.pool.maxIdle>50</qr_offset.redis.write.pool.maxIdle>
+                <qr_offset.client.redis.write.pool.maxIdle>50</qr_offset.client.redis.write.pool.maxIdle>
+                <qr_offset.no.cluster>true</qr_offset.no.cluster>
+
+                <!-- 外链 redis 服务器-->
+                <jobLink.redis.host>10.0.220.3</jobLink.redis.host>
+                <jobLink.redis.port>6379</jobLink.redis.port>
+                <jobLink.redis.password>aldwxredis123</jobLink.redis.password>
+                <jobLink.redis.write.pool.maxIdle>50</jobLink.redis.write.pool.maxIdle>
+                <jobLink.client.redis.write.pool.maxIdle>50</jobLink.client.redis.write.pool.maxIdle>
+                <jobLink.no.cluster>false</jobLink.no.cluster>
+
+                <!--外链分析的offset配置-->
+                <link_offset.redis.host>10.0.220.4</link_offset.redis.host>
+                <link_offset.redis.port>6379</link_offset.redis.port>
+                <link_offset.redis.password>crs-bdy8h57k:aldwxredis123</link_offset.redis.password>
+                <link_offset.redis.write.pool.maxIdle>50</link_offset.redis.write.pool.maxIdle>
+                <link_offset.client.redis.write.pool.maxIdle>50</link_offset.client.redis.write.pool.maxIdle>
+                <link_offset.no.cluster>true</link_offset.no.cluster>
+
+                <!-- 外链-all redis new服务器-->
+                <jobLinkNew.redis.host>10.0.220.119</jobLinkNew.redis.host>
+                <jobLinkNew.redis.port>6379</jobLinkNew.redis.port>
+                <jobLinkNew.redis.password>aldwxredis123</jobLinkNew.redis.password>
+                <jobLinkNew.redis.write.pool.maxIdle>50</jobLinkNew.redis.write.pool.maxIdle>
+                <jobLinkNew.client.redis.write.pool.maxIdle>50</jobLinkNew.client.redis.write.pool.maxIdle>
+                <jobLinkNew.no.cluster>false</jobLinkNew.no.cluster>
+
+                <!--外链的offset配置new-->
+                <new_link_offset.redis.host>10.0.220.4</new_link_offset.redis.host>
+                <new_link_offset.redis.port>6379</new_link_offset.redis.port>
+                <new_link_offset.redis.password>crs-bdy8h57k:aldwxredis123</new_link_offset.redis.password>
+                <new_link_offset.redis.write.pool.maxIdle>50</new_link_offset.redis.write.pool.maxIdle>
+                <new_link_offset.client.redis.write.pool.maxIdle>50</new_link_offset.client.redis.write.pool.maxIdle>
+                <new_link_offset.no.cluster>true</new_link_offset.no.cluster>
+
+                <!-- 外链-all redis 服务器-->
+                <jobAdxLink.redis.host>10.0.220.2</jobAdxLink.redis.host>
+                <jobAdxLink.redis.port>6379</jobAdxLink.redis.port>
+                <jobAdxLink.redis.password>crs-o3gy1ls2:aldwxredis123</jobAdxLink.redis.password>
+                <jobAdxLink.redis.write.pool.maxIdle>50</jobAdxLink.redis.write.pool.maxIdle>
+                <jobAdxLink.client.redis.write.pool.maxIdle>50</jobAdxLink.client.redis.write.pool.maxIdle>
+                <jobAdxLink.no.cluster>true</jobAdxLink.no.cluster>
+
+                <!--外链的offset配置-->
+                <adx_link_offset.redis.host>10.0.220.2</adx_link_offset.redis.host>
+                <adx_link_offset.redis.port>6379</adx_link_offset.redis.port>
+                <adx_link_offset.redis.password>crs-o3gy1ls2:aldwxredis123</adx_link_offset.redis.password>
+                <adx_link_offset.redis.write.pool.maxIdle>50</adx_link_offset.redis.write.pool.maxIdle>
+                <adx_link_offset.client.redis.write.pool.maxIdle>50</adx_link_offset.client.redis.write.pool.maxIdle>
+                <adx_link_offset.no.cluster>true</adx_link_offset.no.cluster>
+
+                <!-- 分享redis 服务器-->
+                <jobShare.redis.host>10.0.220.24</jobShare.redis.host>
+                <jobShare.redis.port>6379</jobShare.redis.port>
+                <jobShare.redis.password>aldwxredis123</jobShare.redis.password>
+                <jobShare.redis.write.pool.maxIdle>50</jobShare.redis.write.pool.maxIdle>
+                <jobShare.client.redis.write.pool.maxIdle>50</jobShare.client.redis.write.pool.maxIdle>
+                <jobShare.no.cluster>false</jobShare.no.cluster>
+
+                <!-- 新 - 分享redis 服务器-->
+                <!--                <jobShare.redis.host>10.0.220.24</jobShare.redis.host>-->
+                <!--                <jobShare.redis.port>6379</jobShare.redis.port>-->
+                <!--                <jobShare.redis.password>aldwxredis123</jobShare.redis.password>-->
+                <!--                <jobShare.redis.write.pool.maxIdle>50</jobShare.redis.write.pool.maxIdle>-->
+                <!--                <jobShare.client.redis.write.pool.maxIdle>50</jobShare.client.redis.write.pool.maxIdle>-->
+                <!--                <jobShare.no.cluster>false</jobShare.no.cluster>-->
+
+                <!--分享的offset配置-->
+                <share_offset.redis.host>10.0.220.8</share_offset.redis.host>
+                <share_offset.redis.port>6379</share_offset.redis.port>
+                <share_offset.redis.password>crs-6ojn93dw:aldwxredis123</share_offset.redis.password>
+                <share_offset.redis.write.pool.maxIdle>50</share_offset.redis.write.pool.maxIdle>
+                <share_offset.client.redis.write.pool.maxIdle>50</share_offset.client.redis.write.pool.maxIdle>
+                <share_offset.no.cluster>true</share_offset.no.cluster>
+
+                <!--趋势模块debug的redis配置-->
+                <debug_trend.redis.host>10.0.220.16</debug_trend.redis.host>
+                <debug_trend.redis.port>6379</debug_trend.redis.port>
+                <debug_trend.redis.password>crs-5p0vqjky:aldwxredis123</debug_trend.redis.password>
+                <debug_trend.redis.write.pool.maxIdle>10</debug_trend.redis.write.pool.maxIdle>
+                <debug_trend.client.redis.write.pool.maxIdle>10</debug_trend.client.redis.write.pool.maxIdle>
+                <debug_trend.no.cluster>true</debug_trend.no.cluster>
+
+                <!--趋势模块debug的offset redis配置-->
+                <debug_trend_offset.redis.host>10.0.220.16</debug_trend_offset.redis.host>
+                <debug_trend_offset.redis.port>6379</debug_trend_offset.redis.port>
+                <debug_trend_offset.redis.password>crs-5p0vqjky:aldwxredis123</debug_trend_offset.redis.password>
+                <debug_trend_offset.redis.write.pool.maxIdle>10</debug_trend_offset.redis.write.pool.maxIdle>
+                <debug_trend_offset.client.redis.write.pool.maxIdle>10
+                </debug_trend_offset.client.redis.write.pool.maxIdle>
+                <debug_trend_offset.no.cluster>true</debug_trend_offset.no.cluster>
+
+                <!-- php的测试redis-->
+                <insertHbase.redis.host>10.0.0.156</insertHbase.redis.host>
+                <insertHbase.redis.port>6379</insertHbase.redis.port>
+                <insertHbase.redis.password>aldwxredis123</insertHbase.redis.password>
+                <insertHbase.redis.write.pool.maxIdle>50</insertHbase.redis.write.pool.maxIdle>
+                <insertHbase.client.redis.write.pool.maxIdle>50</insertHbase.client.redis.write.pool.maxIdle>
+                <insertHbase.no.cluster>true</insertHbase.no.cluster>
+
+
+                <streaming.realtime.interval>180</streaming.realtime.interval>
+                <patch.batch.num>500000</patch.batch.num>
+                <write.to.kafka>true</write.to.kafka>
+                <!-- 提交命令 -->
+                <num.executors>20</num.executors>
+                <executor.cores>3</executor.cores>
+                <executor.memory>10g</executor.memory>
+                <max.cores>60</max.cores>
+                <jar.path>/opt/tencent/rt/</jar.path>
+                <submit.user>hadoop</submit.user>
+            </properties>
+        </profile>
+
+    </profiles>
+    <dependencies>
+        <!-- ******************************************* -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_2.11</artifactId>
+            <version>${spark.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>scala-library</artifactId>
+                    <groupId>org.scala-lang</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-sql_2.11</artifactId>
+            <version>${spark.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.scala-lang</groupId>
+                    <artifactId>scala-library</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>scala-reflect</artifactId>
+                    <groupId>org.scala-lang</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-annotations</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-core-asl</artifactId>
+                    <groupId>org.codehaus.jackson</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-mapper-asl</artifactId>
+                    <groupId>org.codehaus.jackson</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>parquet-jackson</artifactId>
+                    <groupId>org.apache.parquet</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-databind</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+
+            </exclusions>
+            <scope>${system.test.provider}</scope>
+        </dependency>
+
+        <!--spark 升级为2.3.0后，kafka缺少的依赖-->
+        <!--        <dependency>-->
+        <!--        <groupId>org.apache.kafka</groupId>-->
+        <!--        <artifactId>kafka_2.11</artifactId>-->
+        <!--        <version>0.10.0.1</version>-->
+        <!--        </dependency>-->
+
+        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-streaming-kafka-0-10 -->
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming-kafka-0-10_2.11</artifactId>
+            <version>${spark.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>scala-library</artifactId>
+                    <groupId>org.scala-lang</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-streaming_2.11</artifactId>
+            <version>${spark.version}</version>
+            <scope>${system.test.provider}</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-core_2.11</artifactId>
+            <version>${spark.version}</version>
+            <scope>${system.test.provider}</scope>
+            <exclusions>
+                <exclusion>
+                    <artifactId>scala-library</artifactId>
+                    <groupId>org.scala-lang</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-databind</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-module-scala_2.11</artifactId>
+                    <groupId>com.fasterxml.jackson.module</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-core-asl</artifactId>
+                    <groupId>org.codehaus.jackson</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-annotations</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-mapper-asl</artifactId>
+                    <groupId>org.codehaus.jackson</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>hadoop-mapreduce-client-shuffle</artifactId>
+                    <groupId>org.apache.hadoop</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>hadoop-mapreduce-client-shuffle</artifactId>
+                    <groupId>org.apache.hadoop</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>hadoop-mapreduce-client-common</artifactId>
+                    <groupId>org.apache.hadoop</groupId>
+                </exclusion>
+
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.phoenix</groupId>
+            <artifactId>phoenix-spark</artifactId>
+            <version>${phoenix.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jackson-core-asl</artifactId>
+                    <groupId>org.codehaus.jackson</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-mapper-asl</artifactId>
+                    <groupId>org.codehaus.jackson</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-core-asl</artifactId>
+                    <groupId>org.codehaus.jackson</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jackson-mapper-asl</artifactId>
+                    <groupId>org.codehaus.jackson</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>hadoop-mapreduce-client-core</artifactId>
+                    <groupId>org.apache.hadoop</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>hadoop-mapreduce-client-core</artifactId>
+                    <groupId>org.apache.hadoop</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>hadoop-client</artifactId>
+                    <groupId>org.apache.hadoop</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>hadoop-common</artifactId>
+                    <groupId>org.apache.hadoop</groupId>
+                </exclusion>
+
+                <exclusion>
+                    <artifactId>hadoop-hdfs</artifactId>
+                    <groupId>org.apache.hadoop</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.5</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>netty</artifactId>
+                    <groupId>org.jboss.netty</groupId>
+                </exclusion>
+            </exclusions>
+            <scope>${system.test.provider}</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.60</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+            <scope>${system.test.provider}</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+            <scope>${system.test.provider}</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>jackson-annotations</artifactId>
+                    <groupId>com.fasterxml.jackson.core</groupId>
+                </exclusion>
+            </exclusions>
+            <scope>${system.test.provider}</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-scala_2.10</artifactId>
+            <version>${jackson.version}</version>
+            <scope>${system.test.provider}</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.scala-lang</groupId>
+            <artifactId>scala-library</artifactId>
+            <version>${scala.version}</version>
+            <scope>${system.test.provider}</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.typesafe.scala-logging</groupId>
+            <artifactId>scala-logging-api_2.10</artifactId>
+            <version>2.1.2</version>
+            <scope>${system.test.provider}</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.netty</groupId>
+            <artifactId>netty</artifactId>
+            <version>3.2.10.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.jsuereth</groupId>
+            <artifactId>scala-arm_2.10</artifactId>
+            <version>2.0</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>scala-library</artifactId>
+                    <groupId>org.scala-lang</groupId>
+                </exclusion>
+            </exclusions>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>3.1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.44</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <excludes>
+                    <exclude>prod</exclude>
+                </excludes>
+            </resource>
+        </resources>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>net.alchim31.maven</groupId>
+                    <artifactId>scala-maven-plugin</artifactId>
+                    <version>3.2.2</version>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.5.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>scala-compile-first</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>scala-test-compile</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+
+                    </execution>
+
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <filters>
+                                <filter>
+                                    <artifact>*:*</artifact>
+                                    <excludes>
+                                        <exclude>META-INF/*.SF</exclude>
+                                        <exclude>META-INF/*.DSA</exclude>
+                                        <exclude>META-INF/*.RSA</exclude>
+                                    </excludes>
+                                </filter>
+                            </filters>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
